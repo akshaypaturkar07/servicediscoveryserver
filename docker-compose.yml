@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  app:
+    image: eurekaserver:LATEST
+    restart: on-failure
+    build:
+      context: .
+    ports:
+      - 8761:8761
+    networks:
+      - mynetwork
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://docker-mysql:3306/practice?autoReconnect=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+      WAIT_HOSTS: mysql:3306
+networks:
+  mynetwork:
+    driver: bridge
+
+
